@@ -14,9 +14,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Toaster } from "sonner-native";
 import AuthScreen from "./auth";
 import HomeScreen from "./main";
+import PostDetailScreen from "./post/PostDetailScreen";
+import WritePostScreen from "./post/WritePost";
 
 const Stack = createNativeStackNavigator();
-// const Tab = createBottomTabNavigator();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -25,7 +26,6 @@ export default function RootLayout() {
   });
 
   if (!loaded) {
-    // Async font loading only occurs in development.
     return null;
   }
 
@@ -35,8 +35,10 @@ export default function RootLayout() {
         <Toaster />
 
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="main" component={HomeScreen} />
-          <Stack.Screen name="auth" component={AuthScreen} />
+          <Stack.Screen name="Main" component={HomeScreen} />
+          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="WritePost" component={WritePostScreen} />
+          <Stack.Screen name="PostDetail" component={PostDetailScreen} />
         </Stack.Navigator>
 
         <StatusBar style="auto" />
