@@ -156,10 +156,6 @@ export default function BoardScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>게시판</Text>
-      </View>
-
       <View style={styles.searchContainer}>
         <Ionicons
           name="search"
@@ -238,16 +234,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-  },
-  header: {
-    backgroundColor: "#2a2a2a",
-    padding: 16,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#ffffff",
   },
   searchContainer: {
     flexDirection: "row",
