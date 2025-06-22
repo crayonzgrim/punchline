@@ -17,7 +17,7 @@ export class User {
   password: string;
 
   @Column({ unique: true })
-  nickname: string;
+  nickName: string;
 
   @Column({ default: 'user' })
   role: 'user' | 'admin';
