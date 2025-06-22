@@ -5,4 +5,7 @@ export type RootStackParamList = {
   Settings: undefined;
   WritePost: undefined;
   PostDetail: { id: number };
+  Signin: undefined;
+  Signup: undefined;
+  FindPassword: undefined;
 };

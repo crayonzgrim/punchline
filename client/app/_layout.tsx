@@ -1,18 +1,14 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Toaster } from "sonner-native";
-import AuthScreen from "./auth";
+import FindPasswordScreen from "./auth/FindPassword";
+import SigninScreen from "./auth/Signin";
 import HomeScreen from "./main";
 import PostDetailScreen from "./post/PostDetailScreen";
 import WritePostScreen from "./post/WritePost";
@@ -20,7 +16,6 @@ import WritePostScreen from "./post/WritePost";
 const Stack = createNativeStackNavigator();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -31,12 +26,14 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider style={styles.container}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={DarkTheme}>
         <Toaster />
 
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Main" component={HomeScreen} />
-          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="Signin" component={SigninScreen} />
+          <Stack.Screen name="Signup" component={SigninScreen} />
+          <Stack.Screen name="FindPassword" component={FindPasswordScreen} />
           <Stack.Screen name="WritePost" component={WritePostScreen} />
           <Stack.Screen name="PostDetail" component={PostDetailScreen} />
         </Stack.Navigator>
