@@ -4,7 +4,7 @@ export type RootStackParamList = {
   Board: undefined;
   Settings: undefined;
   WritePost: undefined;
-  PostDetail: { id: number };
+  DetailPost: { id: number };
   Signin: undefined;
   Signup: undefined;
   FindPassword: undefined;

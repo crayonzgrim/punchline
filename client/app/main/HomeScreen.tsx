@@ -49,7 +49,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               key={item}
               style={styles.postCard}
-              onPress={() => navigation.navigate("PostDetail", { id: item })}
+              onPress={() => navigation.navigate("DetailPost", { id: item })}
             >
               <Text style={styles.postTitle}>
                 복싱 초보자를 위한 팁 #{item}

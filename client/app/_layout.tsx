@@ -10,7 +10,7 @@ import { Toaster } from "sonner-native";
 import FindPasswordScreen from "./auth/FindPassword";
 import SigninScreen from "./auth/Signin";
 import HomeScreen from "./main";
-import PostDetailScreen from "./post/PostDetailScreen";
+import DetailPostScreen from "./post/DetailPostScreen";
 import WritePostScreen from "./post/WritePost";
 
 const Stack = createNativeStackNavigator();
@@ -35,7 +35,7 @@ export default function RootLayout() {
           <Stack.Screen name="Signup" component={SigninScreen} />
           <Stack.Screen name="FindPassword" component={FindPasswordScreen} />
           <Stack.Screen name="WritePost" component={WritePostScreen} />
-          <Stack.Screen name="PostDetail" component={PostDetailScreen} />
+          <Stack.Screen name="DetailPost" component={DetailPostScreen} />
         </Stack.Navigator>
 
         <StatusBar style="auto" />

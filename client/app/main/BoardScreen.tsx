@@ -125,7 +125,12 @@ export default function BoardScreen() {
 
   const renderPostItem = ({ item }: { item: PostItem }) => {
     return (
-      <TouchableOpacity style={styles.postItem}>
+      <TouchableOpacity
+        style={styles.postItem}
+        onPress={() =>
+          navigation.navigate("DetailPost", { id: Number(item.id) })
+        }
+      >
         <View style={styles.postHeader}>
           <Text style={[styles.postTitle, item.isNotice && styles.noticeTitle]}>
             {item.title}
