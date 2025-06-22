@@ -72,10 +72,6 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>환경설정</Text>
-      </View>
-
       <ScrollView style={styles.content}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>계정</Text>
@@ -135,21 +131,14 @@ export default function SettingsScreen() {
             autoPlay,
             setAutoPlay,
           )}
-
-          {/* {renderLinkItem("language-outline", "언어 설정", () => { })} */}
-          {/* {renderLinkItem( */}
-          {/*   "cloud-download-outline", */}
-          {/*   "데이터 및 저장소", */}
-          {/*   () => { }, */}
-          {/* )} */}
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>지원</Text>
 
-          {/* {renderLinkItem("help-circle-outline", "도움말", () => { })} */}
-          {/* {renderLinkItem("information-circle-outline", "앱 정보", () => { })} */}
-          {/* {renderLinkItem("chatbubble-outline", "피드백 보내기", () => { })} */}
+          {renderLinkItem("help-circle-outline", "도움말", () => { })}
+          {renderLinkItem("information-circle-outline", "앱 정보", () => { })}
+          {renderLinkItem("chatbubble-outline", "피드백 보내기", () => { })}
         </View>
 
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -167,16 +156,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-  },
-  header: {
-    backgroundColor: "#2a2a2a",
-    padding: 16,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#ffffff",
   },
   content: {
     flex: 1,
