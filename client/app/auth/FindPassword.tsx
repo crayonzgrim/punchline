@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function AuthScreen() {
+export default function FindPasswordScreen() {
   return (
     <View>
-      <Text>Auth</Text>
+      <Text>FindPassword</Text>
     </View>
   );
 }
