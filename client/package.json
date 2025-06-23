@@ -1,7 +1,8 @@
 {
-  "name": "client",
+  "name": "punchline",
   "main": "expo-router/entry",
   "version": "1.0.0",
+  "description": "Client for Punchline",
   "scripts": {
     "start": "expo start -c",
     "reset-project": "node ./scripts/reset-project.js",
