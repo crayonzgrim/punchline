@@ -5,6 +5,11 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -17,9 +22,9 @@ export class User {
   password: string;
 
   @Column({ unique: true })
-  nickName: string;
+  nickname: string;
 
-  @Column({ default: 'user' })
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: 'user' | 'admin';
 
   @CreateDateColumn()
