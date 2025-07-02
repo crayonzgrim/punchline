@@ -6,6 +6,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { SigninDto } from './dto/signin.dto';
 import { SignupDto } from './dto/signup.dto';
@@ -18,6 +19,24 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
+  private generateTokens(user: User) {
+    const payload = { sub: user.id, email: user.email, role: user.role };
+
+    const accessToken = this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: this.configService.get('7d'),
+      // expiresIn: this.configService.get('JWT_EXPIRES_IN'),
+    });
+
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: this.configService.get('JWT_SECRET'),
+      expiresIn: this.configService.get('7d'),
+      // expiresIn: this.configService.get('JWT_EXPIRES_IN'),
+    });
+
+    return { accessToken, refreshToken };
+  }
+
   async signup(dto: SignupDto) {
     const emailExist = await this.userService.findByEmail(dto.email);
     if (emailExist) {
@@ -29,22 +48,13 @@ export class AuthService {
       throw new BadRequestException('이미 가입된 닉네임입니다');
     }
 
-    const hashed = await bcrypt.hash(dto.password, 10);
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
     const user = await this.userService.createUser({
       ...dto,
-      password: hashed,
+      password: hashedPassword,
     });
 
-    const payload = { sub: user.id, email: user.email, role: user.role };
-    const accessToken = this.jwtService.sign(payload, {
-      secret: this.configService.get('JWT_SECRET'),
-      expiresIn: this.configService.get('JWT_EXPIRES_IN'),
-    });
-
-    const refreshToken = this.jwtService.sign(payload, {
-      secret: this.configService.get('JWT_SECRET'),
-      expiresIn: '7d',
-    });
+    const { accessToken, refreshToken } = this.generateTokens(user);
 
     return {
       message: '회원가입 성공',
@@ -70,17 +80,7 @@ export class AuthService {
       throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
     }
 
-    const payload = { sub: user.id, email: user.email, role: user.role };
-
-    const accessToken = this.jwtService.sign(payload, {
-      secret: this.configService.get<string>('JWT_SECRET'),
-      expiresIn: this.configService.get<string>('JWT_EXPIRES_IN'),
-    });
-
-    const refreshToken = this.jwtService.sign(payload, {
-      secret: this.configService.get<string>('JWT_SECRET'),
-      expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRES_IN'),
-    });
+    const { accessToken, refreshToken } = this.generateTokens(user);
 
     return {
       message: '로그인 성공',

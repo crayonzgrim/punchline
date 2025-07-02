@@ -7,19 +7,19 @@ import { User } from './user.entity';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepo: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async createUser(userData: Partial<User>): Promise<User> {
-    const user = this.userRepo.create(userData);
-    return await this.userRepo.save(user);
+    const user = this.userRepository.create(userData);
+    return await this.userRepository.save(user);
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.userRepo.findOne({ where: { email } });
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async findByNickName(nickname: string): Promise<User | null> {
-    return await this.userRepo.findOne({ where: { nickname } });
+    return await this.userRepository.findOne({ where: { nickname } });
   }
 }

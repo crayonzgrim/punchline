@@ -25,7 +25,7 @@ export class User {
   nickname: string;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  role: 'user' | 'admin';
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;
