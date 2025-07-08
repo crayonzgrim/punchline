@@ -1,7 +1,9 @@
+import { BoardPost } from 'src/board-post/board-post.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -29,4 +31,7 @@ export class User {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(() => BoardPost, (post) => post.author)
+  boardPosts: BoardPost[];
 }
