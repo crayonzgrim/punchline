@@ -24,14 +24,12 @@ export class AuthService {
 
     const accessToken = this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET'),
-      expiresIn: this.configService.get('7d'),
-      // expiresIn: this.configService.get('JWT_EXPIRES_IN'),
+      expiresIn: this.configService.get('JWT_EXPIRES_IN'),
     });
 
     const refreshToken = this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET'),
-      expiresIn: this.configService.get('7d'),
-      // expiresIn: this.configService.get('JWT_EXPIRES_IN'),
+      expiresIn: this.configService.get('JWT_EXPIRES_IN'),
     });
 
     return { accessToken, refreshToken };
@@ -54,12 +52,8 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    const { accessToken, refreshToken } = this.generateTokens(user);
-
     return {
       message: '회원가입 성공',
-      accessToken,
-      refreshToken,
       user: {
         id: user.id,
         email: user.email,
